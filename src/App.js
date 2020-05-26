@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Quadrant from "./Quadrant/quadrant";
 import RadarPlot from "./Semiotic/radar";
 import NavBar from "./NavBar/navigation";
 import FormComponent from "./modelForm/form-component";
+import ThinkingStyle from "./modelThinking/thinking-component";
 
 function App() {
   const [formData, setFormData] = useState(null);
@@ -11,6 +12,7 @@ function App() {
   let [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     if (formData) {
+      setIsLoading(true);
       fetch("api/coordinates")
         .then((response) => {
           if (!response.ok) throw new Error(response.status);
@@ -25,13 +27,21 @@ function App() {
         });
     }
   }, [formData]);
-
+  let fSection = useRef();
+  let fCharts = useRef();
   return (
     <div className="container">
-      <NavBar /> <FormComponent setFormData={setFormData} />
-      <div className="columns mt-2 mb-2">
+      <NavBar />
+      <div className="hero hero-sm bg-dark">
+        <div className="hero-body text-center">
+          <h1>Discover your thinking style and natural preference</h1>
+          <p>Test your brain dominance</p>
+        </div>
+      </div>
+      <FormComponent setFormData={setFormData} fSection={fSection} />
+      <div className="columns" style={{ marginTop: "5%" }} ref={fCharts}>
         {formData && isLoading && (
-          <div className="column col-12 mt-2 mb-2">
+          <div className="column col-12">
             <div className="loading loading-lg"></div>
           </div>
         )}
@@ -39,7 +49,7 @@ function App() {
           {!isLoading && coordinates && (
             <div className="bg">
               <div className="quadrant">
-                <Quadrant coordinates={coordinates} />
+                <Quadrant coordinates={coordinates.quadrant} />
               </div>
             </div>
           )}
@@ -48,12 +58,13 @@ function App() {
           {!isLoading && coordinates && (
             <div className="bg">
               <div className="semiotic">
-                <RadarPlot />
+                <RadarPlot coordinates={coordinates.semiotic} />
               </div>
             </div>
           )}
         </div>
       </div>
+      <ThinkingStyle fSection={fSection} />
     </div>
   );
 }

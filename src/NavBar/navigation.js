@@ -45,16 +45,10 @@ const Navigation = () => {
     <NavBar className="navbar">
       <NavContent>
         <NavBrand>
-          <img src={logo} alt="logo weather app" />
+          <img src={logo} alt="brain prototype" />
         </NavBrand>
         <NavLinks>
-          <a
-            href="https://github.com/antezananoemi/weatherapp"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            About
-          </a>
+          <a href="/">About</a>
         </NavLinks>
       </NavContent>
     </NavBar>

@@ -1,16 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const FormComponent = ({ setFormData }) => {
+const FormComponent = ({ setFormData, fSection }) => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data) => {
-    //console.log(data);
     setFormData(data);
   };
 
   return (
-    <div className="columns mt-2">
+    <div className="columns" style={{ marginTop: "5%" }} ref={fSection}>
       <div className="column col-6 col-mx-auto">
         <div className="form-group">
           <h2>Brain dominance</h2>

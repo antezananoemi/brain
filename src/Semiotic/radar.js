@@ -1,62 +1,8 @@
 import React from "react";
 import OrdinalFrame from "semiotic/lib/OrdinalFrame";
+
 const frameProps = {
-  data: [
-    {
-      name: "Adult",
-      color: "#E0488B",
-      attribute: "Frontal Right",
-      value: 120,
-    },
-    {
-      name: "Adult",
-      color: "#E0488B",
-      attribute: "Basal Right",
-      value: 98,
-    },
-    {
-      name: "Adult",
-      color: "#E0488B",
-      attribute: "Basal Left",
-      value: 70,
-    },
-    {
-      name: "Adult",
-      color: "#E0488B",
-      attribute: "Frontal Left",
-      value: 59,
-    },
-    {
-      name: "Child",
-      color: "#9fd0cb",
-      attribute: "Frontal Right",
-      value: 102,
-    },
-    {
-      name: "Child",
-      color: "#9fd0cb",
-      attribute: "Basal Right",
-      value: 101,
-    },
-    {
-      name: "Child",
-      color: "#9fd0cb",
-      attribute: "Basal Left",
-      value: 99,
-    },
-    {
-      name: "Child",
-      color: "#9fd0cb",
-      attribute: "Frontal Left",
-      value: 22,
-    },
-    {
-      name: "Child",
-      color: "#9fd0cb",
-      attribute: "Frontal Left",
-      value: 0,
-    },
-  ],
+  data: [],
   size: [500, 400],
   margin: { top: 70, left: 133 },
   type: "point",
@@ -67,9 +13,9 @@ const frameProps = {
   oAccessor: "attribute",
   rAccessor: "value",
   rExtent: (0)[(0, 120)],
-
+  color: "white",
   style: function (e) {
-    return { fill: e.color, stroke: "white", strokeOpacity: 0.5 };
+    return { fill: "white", stroke: "white", strokeOpacity: 0.5 };
   },
   connectorStyle: function (e) {
     return {
@@ -79,7 +25,6 @@ const frameProps = {
       fillOpacity: 0.5,
     };
   },
-  //title: "Basal Derecho Trimodal",
   axes: true,
   pieceHoverAnnotation: true,
   tooltipContent: (d) => (
@@ -90,6 +35,7 @@ const frameProps = {
   oLabel: true,
 };
 
-export default () => {
+export default ({ coordinates }) => {
+  frameProps.data = coordinates;
   return <OrdinalFrame {...frameProps} />;
 };

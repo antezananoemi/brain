@@ -1,21 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { RadarChart } from "react-vis";
 import "../../node_modules/react-vis/dist/style.css";
 const RADAR_PROPS = {
-  data: [
-    {
-      FrontRight: 30,
-      FrontLeft: 60,
-      BasalLeft: 40,
-      BasalRight: 40,
-    },
-    {
-      FrontRight: 150,
-      FrontLeft: 75,
-      BasalLeft: 80,
-      BasalRight: 64,
-    },
-  ],
+  data: [],
   domains: [
     { name: "FrontRight", domain: [0, 120] },
     { name: "FrontLeft", domain: [0, 120] },
@@ -26,39 +13,14 @@ const RADAR_PROPS = {
   width: 500,
 };
 
-export default function FourQuadrantRadarChart(props) {
-  const [data, setData] = useState(RADAR_PROPS.data);
-  const [valor, setValor] = useState(0);
-  useEffect(() => {
-    setData([
-      {
-        FrontRight: valor - 5,
-        FrontLeft: valor + 10,
-        BasalLeft: valor - 10,
-        BasalRight: valor - 30,
-      },
-      {
-        FrontRight: 120,
-        FrontLeft: 75,
-        BasalLeft: 80,
-        BasalRight: 64,
-      },
-    ]);
-  }, [valor]);
+export default function FourQuadrantRadarChart({ coordinates }) {
   return (
     <>
-      <input
-        className="slider"
-        type="range"
-        min="0"
-        max="120"
-        onChange={(e) => setValor(Number(e.target.value))}
-      />
       <br />
       <div style={{ marginLeft: "33px" }}>
         <RadarChart
           animation
-          data={data}
+          data={coordinates}
           domains={RADAR_PROPS.domains}
           height={RADAR_PROPS.height}
           width={RADAR_PROPS.width}
